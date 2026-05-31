@@ -132,9 +132,9 @@ main {
 }
 
 .portrait {
-  --portrait-x: 87%;
-  --portrait-y: 26%;
-  --portrait-shift-y: 10px;
+  --portrait-x: 50%;
+  --portrait-y: 50%;
+  --portrait-shift-y: 0;
   position: absolute;
   top: calc(var(--card-pad) + var(--avatar-ring-bleed));
   left: 50%;
