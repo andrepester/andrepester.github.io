@@ -1,0 +1,385 @@
+:root {
+  color-scheme: light;
+  --page: #e7edf5;
+  --surface: #eaf0f7;
+  --surface-low: #dce5ef;
+  --ink: #182130;
+  --muted: #586476;
+  --quiet: #697486;
+  --accent-soft: #d8ecee;
+  --shadow-soft: 22px 26px 58px rgba(135, 150, 174, 0.46),
+    -18px -20px 42px rgba(255, 255, 255, 0.86);
+  --measure: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.44), rgba(210, 221, 234, 0.74)),
+    var(--page);
+  color: var(--ink);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding: 34px 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 34%),
+    var(--page);
+}
+
+main {
+  width: min(100%, 820px);
+  display: grid;
+  gap: 28px;
+}
+
+.profile {
+  --profile-card-pad: clamp(24px, 4.6vw, 46px);
+  min-height: calc(100vh - 64px);
+  display: grid;
+  align-content: center;
+  gap: var(--profile-card-pad);
+}
+
+.intro {
+  --card-pad: var(--profile-card-pad);
+  --avatar-size: 184px;
+  --avatar-ring-bleed: 9px;
+  --avatar-hole: calc((var(--avatar-size) / 2) + 8px);
+  --avatar-center-y: calc(var(--card-pad) + (var(--avatar-size) / 2) + var(--avatar-ring-bleed));
+  position: relative;
+  display: grid;
+  gap: 18px;
+  min-height: 0;
+  padding: calc(var(--card-pad) + var(--avatar-size) + 36px) var(--card-pad) var(--card-pad);
+  isolation: isolate;
+}
+
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 34px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.7), rgba(214, 224, 236, 0.62)),
+    var(--surface);
+  box-shadow: var(--shadow-soft);
+  pointer-events: none;
+  -webkit-mask:
+    radial-gradient(
+      circle at 50% var(--avatar-center-y),
+      transparent 0 var(--avatar-hole),
+      #000 calc(var(--avatar-hole) + 1px)
+    );
+  mask:
+    radial-gradient(
+      circle at 50% var(--avatar-center-y),
+      transparent 0 var(--avatar-hole),
+      #000 calc(var(--avatar-hole) + 1px)
+    );
+}
+
+.intro::after {
+  content: "";
+  position: absolute;
+  top: var(--avatar-center-y);
+  left: 50%;
+  z-index: 3;
+  width: calc(var(--avatar-size) + 18px);
+  height: calc(var(--avatar-size) + 18px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(
+      circle,
+      transparent 0 58%,
+      rgba(116, 131, 157, 0.1) 70%,
+      rgba(42, 54, 75, 0.3) 94%,
+      rgba(24, 33, 48, 0.39) 100%
+    ),
+    conic-gradient(
+      from 190deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(255, 255, 255, 0.28) 52deg,
+      rgba(255, 255, 255, 0) 112deg,
+      rgba(74, 88, 112, 0.16) 252deg,
+      rgba(74, 88, 112, 0.32),
+      rgba(255, 255, 255, 0.82)
+    );
+  box-shadow:
+    inset 9px 10px 20px rgba(88, 103, 128, 0.34),
+    inset -8px -8px 18px rgba(255, 255, 255, 0.72);
+  pointer-events: none;
+  -webkit-mask:
+    radial-gradient(circle, transparent 0 58%, #000 59% 100%);
+  mask:
+    radial-gradient(circle, transparent 0 58%, #000 59% 100%);
+}
+
+.intro > :not(.portrait) {
+  position: relative;
+  z-index: 2;
+}
+
+.portrait {
+  --portrait-x: 87%;
+  --portrait-y: 26%;
+  --portrait-shift-y: 10px;
+  position: absolute;
+  top: calc(var(--card-pad) + var(--avatar-ring-bleed));
+  left: 50%;
+  z-index: 0;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  margin: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  transform: translateX(-50%);
+  background: var(--surface-low);
+  box-shadow:
+    8px 10px 24px rgba(116, 130, 154, 0.24),
+    -8px -9px 22px rgba(255, 255, 255, 0.82);
+}
+
+.portrait img {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 20px);
+  display: block;
+  filter: saturate(0.96) contrast(0.98);
+  object-fit: cover;
+  object-position: var(--portrait-x) var(--portrait-y);
+  transform: translateY(var(--portrait-shift-y));
+}
+
+.competence-band {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: var(--measure);
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.competence-band li,
+.credentials li,
+h1 {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  color: #334052;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.38), rgba(217, 226, 237, 0.54));
+  border-radius: 999px;
+  box-shadow:
+    7px 8px 16px rgba(137, 151, 175, 0.28),
+    -6px -7px 14px rgba(255, 255, 255, 0.76);
+  padding: 8px 13px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: var(--measure);
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.credentials li {
+  background:
+    linear-gradient(145deg, rgba(244, 255, 255, 0.5), rgba(205, 226, 230, 0.52)),
+    var(--accent-soft);
+  box-shadow:
+    7px 8px 16px rgba(111, 139, 147, 0.22),
+    -6px -7px 14px rgba(255, 255, 255, 0.76);
+  font-size: 0.9rem;
+  font-weight: 720;
+}
+
+h1 {
+  justify-self: center;
+  max-width: 100%;
+  margin: 0 0 2px;
+  padding: 9px 16px;
+  color: #334052;
+  font-size: 1.48rem;
+  line-height: 1.15;
+  font-weight: 780;
+  letter-spacing: 0;
+  box-shadow:
+    9px 10px 20px rgba(137, 151, 175, 0.3),
+    -7px -8px 16px rgba(255, 255, 255, 0.78);
+}
+
+p {
+  max-width: var(--measure);
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.intro > p {
+  hyphens: auto;
+  text-align: justify;
+  text-align-last: left;
+}
+
+.profile-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.profile-link {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(215, 224, 236, 0.62));
+  border: 0;
+  border-radius: 50%;
+  box-shadow:
+    10px 12px 24px rgba(132, 147, 172, 0.36),
+    -8px -10px 22px rgba(255, 255, 255, 0.84);
+  text-decoration: none;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.profile-link:hover {
+  box-shadow:
+    7px 8px 18px rgba(132, 147, 172, 0.34),
+    -6px -7px 16px rgba(255, 255, 255, 0.82);
+  transform: translateY(1px);
+}
+
+.profile-link:focus-visible {
+  outline: 0;
+  box-shadow:
+    0 0 0 4px rgba(15, 139, 141, 0.18),
+    10px 12px 24px rgba(132, 147, 172, 0.36),
+    -8px -10px 22px rgba(255, 255, 255, 0.84);
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  filter: grayscale(1) saturate(0) opacity(0.64);
+  object-fit: contain;
+  transition: filter 160ms ease;
+}
+
+.profile-link:hover .brand-mark,
+.profile-link:focus-visible .brand-mark {
+  filter: none;
+}
+
+.legal {
+  display: grid;
+  gap: 12px;
+  padding: 20px clamp(12px, 3vw, 28px) 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+}
+
+.legal p,
+.legal address {
+  max-width: none;
+  color: var(--quiet);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.legal address {
+  margin: 0;
+  font-style: normal;
+}
+
+.legal .legal-note {
+  font-size: 0.72rem;
+}
+
+@media (max-width: 620px) {
+  body {
+    padding: 18px 14px;
+  }
+
+  .intro {
+    --avatar-size: 138px;
+    gap: 14px;
+    padding-top: calc(var(--card-pad) + var(--avatar-size) + 32px);
+  }
+
+  .intro::before {
+    border-radius: 26px;
+  }
+
+  .profile {
+    --profile-card-pad: 22px;
+    min-height: calc(100vh - 40px);
+  }
+
+  .competence-band {
+    gap: 8px;
+  }
+
+  .competence-band li,
+  .credentials li {
+    min-height: 32px;
+    padding: 7px 10px;
+    font-size: 0.84rem;
+  }
+
+  .credentials {
+    margin-top: 6px;
+    gap: 8px;
+  }
+
+  .profile-links {
+    gap: 14px;
+  }
+
+  .profile-link {
+    width: 50px;
+    height: 50px;
+  }
+
+  h1 {
+    min-height: 34px;
+    padding: 8px 12px;
+    font-size: 1.18rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+  }
+}
