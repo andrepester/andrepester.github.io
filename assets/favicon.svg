@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">AP favicon</title>
+  <desc id="desc">White AP monogram on a dark blue rounded square with a blue accent bar.</desc>
+  <rect width="512" height="512" rx="92" fill="#13263b"/>
+  <rect x="121" y="405" width="194" height="24" rx="12" fill="#8fb6d9"/>
+  <path fill="#f5f7fb" fill-rule="evenodd" d="M42 441h68l28-69h113l28 69h72L226 166h-59L42 441Zm117-122h71l-35-88-36 88Z"/>
+  <path fill="#f5f7fb" fill-rule="evenodd" d="M286 166h88c68 0 111 39 111 99 0 61-43 101-111 101h-31v75h-57V166Zm57 53v94h32c34 0 55-17 55-48 0-30-21-46-55-46h-32Z"/>
+</svg>
